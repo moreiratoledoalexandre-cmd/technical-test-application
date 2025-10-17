@@ -15,7 +15,7 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddDbContext<MovieCatalogContext>(options =>
 {
-    var connectionstring = "mongodb://root:password@localhost:27017/?authSource=admin";
+    var connectionstring = "mongodb://root:password@mongo:27017/?authSource=admin";
     var database = "movies_db";
     options.UseMongoDB(connectionstring, database);
 });
@@ -23,11 +23,8 @@ builder.Services.AddDbContext<MovieCatalogContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 app.MapControllers();
 app.UseHttpsRedirection();
 
