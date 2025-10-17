@@ -1,5 +1,15 @@
 services:
-  mongodb:
+  app:
+    image: movie-catalog-api
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - mongodb_network
+    depends_on:
+      - mongo  
+
+  mongo:
     image: mongo:latest
     container_name: mongodb
     hostname: mongodb
@@ -16,6 +26,11 @@ services:
       - "27017:27017"
     networks:
       - mongodb_network
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet 'mongodb://root:password@localhost:27017/admin' --eval 'db.runCommand({ ping: 1 })'"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
   mongo-express:
     image: mongo-express:latest
@@ -33,7 +48,7 @@ services:
     networks:
       - mongodb_network
     depends_on:
-      - mongodb
+      - mongo
 
 volumes:
   mongodb-data:
