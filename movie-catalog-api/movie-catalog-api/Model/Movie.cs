@@ -11,7 +11,7 @@ namespace movie_catalog_api.Model
     [Collection("movies_collection")]
     public class Movie
     {
-       [BsonId]
+        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
