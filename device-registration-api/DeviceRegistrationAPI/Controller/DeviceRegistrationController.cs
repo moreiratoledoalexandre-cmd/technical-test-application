@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DeviceRegistrationAPI.Controller
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class DeviceRegistrationController:ControllerBase
     {
@@ -22,6 +21,7 @@ namespace DeviceRegistrationAPI.Controller
         /// <summary>
         /// Register a new device for a specific user
         /// </summary>
+        [Route("Device/register")]
         [HttpPost]
         public async Task<ActionResult<string>> InsertAsync([FromBody] DeviceRegistrationRequest request)
         {
