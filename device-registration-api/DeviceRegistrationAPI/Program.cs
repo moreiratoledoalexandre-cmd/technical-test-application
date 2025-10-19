@@ -9,28 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<DeviceRegistrationContext>(options =>
+{
+    var connectionstring = "mongodb://root:password@localhost:27017/?authSource=admin";
+    var database = "device_register_db";
+    options.UseMongoDB(connectionstring, database);
+});
 builder.Services.AddScoped<IDeviceRegistrationService, DeviceRegistrationService>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    builder.Services.AddDbContext<DeviceRegistrationContext>(options =>
-    {
-        var connectionstring = "mongodb://root:password@localhost:27017/?authSource=admin";
-        var database = "device_register_db";
-        options.UseMongoDB(connectionstring, database);
-    });
-}
-else
-{
-    builder.Services.AddDbContext<DeviceRegistrationContext>(options =>
-    {
-        var connectionstring = "mongodb://root:password@mongo:27017/?authSource=admin";
-        var database = "device_register_db";
-        options.UseMongoDB(connectionstring, database);
-    });
-}
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

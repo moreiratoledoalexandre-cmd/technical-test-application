@@ -16,7 +16,7 @@ namespace StatisticsAPI.DBContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<LogHistory>().ToCollection("log_history_collection");
+            modelBuilder.Entity<LogHistory>().ToCollection("log_history_collection").Property(t => t.Id).ValueGeneratedOnAdd();
         }
     }
 }

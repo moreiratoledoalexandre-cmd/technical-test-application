@@ -17,7 +17,7 @@ namespace DeviceRegistrationAPI.DBContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<UserDevices>().ToCollection("user_devices_collection");
+            modelBuilder.Entity<UserDevices>().ToCollection("user_devices_collection").HasKey(c => c.UserKey);
         }
     }
 }

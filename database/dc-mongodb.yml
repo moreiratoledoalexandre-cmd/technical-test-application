@@ -1,9 +1,9 @@
 services:
-  app:
-    image: movie-catalog-api
+  device:
+    image: device-registration-api
     build: .
     ports:
-      - "8080:8080"
+      - ":8081"
     networks:
       - mongodb_network
     depends_on:

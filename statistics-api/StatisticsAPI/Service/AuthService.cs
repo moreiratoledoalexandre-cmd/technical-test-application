@@ -65,7 +65,7 @@ namespace StatisticsAPI.Service
             }
             catch (System.Exception)
             {
-                return "bad_request";
+               throw;
             }
         }
     }

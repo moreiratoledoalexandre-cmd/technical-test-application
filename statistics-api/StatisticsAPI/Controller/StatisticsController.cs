@@ -39,11 +39,12 @@ namespace StatisticsAPI.Controller
 
             return Ok(response);
         }
-        
+
         /// <summary>
         /// Get sum of all users login for a specific device type
         /// </summary>
-        [Route("Log/auth/statistics")]
+        [Route("Log/auth/statistics/{filter}")]
+        [HttpGet]
         public async Task<ActionResult<DeviceStatisticsResponse>> GetStatistics([FromRoute] string filter)
         {
             var response = _statisticsService.DeviceStatistics(filter); 

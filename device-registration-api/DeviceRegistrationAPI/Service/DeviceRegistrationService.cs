@@ -28,6 +28,7 @@ namespace DeviceRegistrationAPI.Service
                 }
 
                 var userDevices = new UserDevices();
+                userDevices.Devices = new List<string>();
 
                 var registredUser = _context.UserDevices.Find(deviceRegistrationRequest.UserKey);
 
@@ -37,7 +38,8 @@ namespace DeviceRegistrationAPI.Service
                     userDevices.UserKey = deviceRegistrationRequest.UserKey;
                     userDevices.Devices.Add(deviceRegistrationRequest.DeviceType);
                     _context.UserDevices.Add(userDevices);
-                } else
+                }
+                else
                 {
                     userDevices = registredUser;
                     userDevices.Devices.Add(deviceRegistrationRequest.DeviceType);
